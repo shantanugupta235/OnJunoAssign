@@ -6,11 +6,18 @@
 //
 
 import Foundation
+protocol ImageLoadedDelegate: AnyObject {
+    func didGetLogoImage(data: Data)
+}
 
 class MainPageViewModel {
     let urlForState0 = "https://demo9414936.mockable.io/empty-home"
     let urlForState1 = "https://demo9414936.mockable.io/home"
     var apiUrl:String=""
+    var realImgData: Data?
+    
+    weak var delegate: ImageLoadedDelegate?
+    
     func performRequest(for state: States, completion: @escaping (HomeModel)->()) {
         
         switch state {
@@ -44,5 +51,18 @@ class MainPageViewModel {
             task.resume()
         }
         
+    }
+    func performImageLoaderRequest(url: String) {
+        
+        ImageLoader.getImageFromUrl(url: url, completion: { [weak self] data in
+            
+            self?.realImgData = data
+            if let realImgData = self?.realImgData{
+                self?.delegate?.didGetLogoImage(data: realImgData)
+            }
+//            return realImgData
+            
+        })
+
     }
 }
