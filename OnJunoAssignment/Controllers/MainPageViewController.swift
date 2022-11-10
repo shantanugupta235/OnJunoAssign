@@ -43,14 +43,6 @@ class MainPageViewController: UIViewController, ViemModelToControllerDelegate{
            return
         }
         mainPageViewModel.getMainPageModelData(for: state)
-//        mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
-//            guard let weakSelf = self else { return }
-//            weakSelf.homeContentModel = homeModel
-//
-//            DispatchQueue.main.async {
-//                weakSelf.tableView.reloadData()
-//            }
-//        })
     }
     func reloadTheData(dataModel: HomeModel) {
         self.homeContentModel = dataModel
@@ -126,8 +118,6 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
         if section >= 3{
             return nil
         }
-        let insets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-
         let v = UIView(frame: CGRect(x: 0, y:0, width: tableView.frame.width, height: 1))
         v.bounds = v.frame.insetBy(dx: 0.0, dy: 10.0)
 
