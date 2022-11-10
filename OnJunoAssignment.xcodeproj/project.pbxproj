@@ -26,11 +26,11 @@
 		977F0723291AB095002E0BD4 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F0722291AB095002E0BD4 /* MainPageViewModel.swift */; };
 		977F0725291AEAC4002E0BD4 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F0724291AEAC4002E0BD4 /* HomeModel.swift */; };
 		977F0729291B766A002E0BD4 /* HeaderMainPageTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F0728291B766A002E0BD4 /* HeaderMainPageTVCell.swift */; };
-		977F072E291BC2B3002E0BD4 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F072D291BC2B3002E0BD4 /* ImageLoader.swift */; };
 		977F0731291C5180002E0BD4 /* CollectionInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F072F291C5180002E0BD4 /* CollectionInTableViewCell.swift */; };
 		977F0732291C5180002E0BD4 /* CollectionInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977F0730291C5180002E0BD4 /* CollectionInTableViewCell.xib */; };
 		977F15DF291D225400056DFF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F15DE291D225400056DFF /* UIView+Extensions.swift */; };
 		97AFD6EC291D293C003ADD0D /* HeaderMainPageTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AFD6EB291D293C003ADD0D /* HeaderMainPageTVCell.xib */; };
+		97AFD6EE291D4408003ADD0D /* HttpRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFD6ED291D4408003ADD0D /* HttpRequestHelper.swift */; };
 		BDEB7C9A19AED428E051D65C /* Pods_OnJunoAssignment_OnJunoAssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E00756EF6A213C4DE7B66B /* Pods_OnJunoAssignment_OnJunoAssignmentUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,11 +79,11 @@
 		977F0722291AB095002E0BD4 /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		977F0724291AEAC4002E0BD4 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		977F0728291B766A002E0BD4 /* HeaderMainPageTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMainPageTVCell.swift; sourceTree = "<group>"; };
-		977F072D291BC2B3002E0BD4 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		977F072F291C5180002E0BD4 /* CollectionInTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionInTableViewCell.swift; sourceTree = "<group>"; };
 		977F0730291C5180002E0BD4 /* CollectionInTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionInTableViewCell.xib; sourceTree = "<group>"; };
 		977F15DE291D225400056DFF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		97AFD6EB291D293C003ADD0D /* HeaderMainPageTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderMainPageTVCell.xib; sourceTree = "<group>"; };
+		97AFD6ED291D4408003ADD0D /* HttpRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestHelper.swift; sourceTree = "<group>"; };
 		E6B6055636B7C254708DBA75 /* Pods-OnJunoAssignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnJunoAssignment.debug.xcconfig"; path = "Target Support Files/Pods-OnJunoAssignment/Pods-OnJunoAssignment.debug.xcconfig"; sourceTree = "<group>"; };
 		ECF589023B2B9E964224B1B1 /* Pods-OnJunoAssignment-OnJunoAssignmentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnJunoAssignment-OnJunoAssignmentUITests.release.xcconfig"; path = "Target Support Files/Pods-OnJunoAssignment-OnJunoAssignmentUITests/Pods-OnJunoAssignment-OnJunoAssignmentUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FFB895132DE5553BB92F6B47 /* Pods-OnJunoAssignment-OnJunoAssignmentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnJunoAssignment-OnJunoAssignmentUITests.debug.xcconfig"; path = "Target Support Files/Pods-OnJunoAssignment-OnJunoAssignmentUITests/Pods-OnJunoAssignment-OnJunoAssignmentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		977F072C291BC299002E0BD4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				977F072D291BC2B3002E0BD4 /* ImageLoader.swift */,
+				97AFD6ED291D4408003ADD0D /* HttpRequestHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -499,10 +499,10 @@
 			files = (
 				977F06E7291A832D002E0BD4 /* ViewController.swift in Sources */,
 				977F06E3291A832D002E0BD4 /* AppDelegate.swift in Sources */,
-				977F072E291BC2B3002E0BD4 /* ImageLoader.swift in Sources */,
 				977F071B291AA17B002E0BD4 /* CurrentPricesCollectionViewCell.swift in Sources */,
 				977F0731291C5180002E0BD4 /* CollectionInTableViewCell.swift in Sources */,
 				977F0723291AB095002E0BD4 /* MainPageViewModel.swift in Sources */,
+				97AFD6EE291D4408003ADD0D /* HttpRequestHelper.swift in Sources */,
 				977F15DF291D225400056DFF /* UIView+Extensions.swift in Sources */,
 				977F0729291B766A002E0BD4 /* HeaderMainPageTVCell.swift in Sources */,
 				977F0725291AEAC4002E0BD4 /* HomeModel.swift in Sources */,

@@ -11,7 +11,8 @@ enum States: Int{
     case zero = 0
     case normal = 1
 }
-class MainPageViewController: UIViewController{
+class MainPageViewController: UIViewController, ViemModelToControllerDelegate{
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,30 +20,12 @@ class MainPageViewController: UIViewController{
     var homeContentModel: HomeModel?
     
     let mainPageViewModel = MainPageViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initView()
         initViewModel()
-        
-//        tableView.register(MainPageTableViewCell.nib(), forCellReuseIdentifier: MainPageTableViewCell.identifier)
-//        tableView.register(UINib(nibName: "HeaderMainPageTVCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "HeaderMainPageTVCell")
-//        tableView.register(CollectionInTableViewCell.nib(), forCellReuseIdentifier: CollectionInTableViewCell.identifier)
-//        tableView.delegate = self
-//        tableView.dataSource = self
-        
-//        guard let state = state else{
-//           return
-//        }
-//
-//        mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
-//            guard let weakSelf = self else { return }
-//            weakSelf.homeContentModel = homeModel
-//
-//            DispatchQueue.main.async {
-//                weakSelf.tableView.reloadData()
-//            }
-//        })
         
     }
     
@@ -52,25 +35,33 @@ class MainPageViewController: UIViewController{
         tableView.register(CollectionInTableViewCell.nib(), forCellReuseIdentifier: CollectionInTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
+        mainPageViewModel.delegate = self
     }
     
     func initViewModel(){
         guard let state = state else{
            return
         }
-       
-        mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
-            guard let weakSelf = self else { return }
-            weakSelf.homeContentModel = homeModel
-            
-            DispatchQueue.main.async {
-                weakSelf.tableView.reloadData()
-            }
-        })
+        mainPageViewModel.getMainPageModelData(for: state)
+//        mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
+//            guard let weakSelf = self else { return }
+//            weakSelf.homeContentModel = homeModel
+//
+//            DispatchQueue.main.async {
+//                weakSelf.tableView.reloadData()
+//            }
+//        })
+    }
+    func reloadTheData(dataModel: HomeModel) {
+        self.homeContentModel = dataModel
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
 }
 
+//MARK: - UITableViewDelegate, UITableViewDataSource
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -115,11 +106,13 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
         }
         return CGFloat(70)//UITableView.automaticDimension
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderMainPageTVCell") as! HeaderMainPageTVCell
         headerView.configureHeaderForSection(section: section)
         return headerView
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0{
             return 0
@@ -128,16 +121,22 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
             return 50
         }
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section >= 3{
             return nil
         }
-        let newWidth = tableView.frame.width - 32.0
-        let v = UIView(frame: CGRect(x: 0, y:0, width: newWidth, height: 1))
+        let insets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+
+        let v = UIView(frame: CGRect(x: 0, y:0, width: tableView.frame.width, height: 1))
+        v.bounds = v.frame.insetBy(dx: 0.0, dy: 10.0)
+
         v.backgroundColor = .lightGray.withAlphaComponent(0.5)
-        return v
+        
+        return nil
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1.0//CGFloat.leastNormalMagnitude
+        return CGFloat.leastNormalMagnitude
     }
 }

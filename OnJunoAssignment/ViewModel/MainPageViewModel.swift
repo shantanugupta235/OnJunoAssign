@@ -6,62 +6,42 @@
 //
 
 import Foundation
-protocol ImageLoadedDelegate: AnyObject {
-    func didGetLogoImage(data: Data)
+protocol ViemModelToControllerDelegate: AnyObject {
+    func reloadTheData(dataModel: HomeModel)
 }
 
 class MainPageViewModel {
     let urlForState0 = "https://demo9414936.mockable.io/empty-home"
     let urlForState1 = "https://demo9414936.mockable.io/home"
     var apiUrl:String=""
-    var realImgData: Data?
     
-    weak var delegate: ImageLoadedDelegate?
+    weak var delegate: ViemModelToControllerDelegate?
     
-    func performRequest(for state: States, completion: @escaping (HomeModel)->()) {
-        
+    var homeContentModel: HomeModel?
+    
+    func getMainPageModelData(for state: States){
         switch state {
             case .zero:
                 apiUrl = urlForState0
             case .normal:
                 apiUrl = urlForState1
         }
-        if let url = URL(string: apiUrl){
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url, completionHandler: {(data, response, error) in
-                guard let data = data,error == nil else{
-                    return
-                }
-                //print(String(data: data, encoding: .utf8)!)
-                var resultHomeModel: HomeModel?
+        HttpRequestHelper.fetch(from: apiUrl, complete: {(success, data) in
+            if success, let data = data {
                 do{
-                    resultHomeModel = try JSONDecoder().decode(HomeModel.self, from: data)
-                }catch{
-                    print("failed to convert ----\(error.localizedDescription)")
+                    self.homeContentModel = try JSONDecoder().decode(HomeModel.self, from: data)
+                    guard let homeContentModel = self.homeContentModel else{
+                        print("homeContentModel is nil")
+                        return
+                    }
+                    self.delegate?.reloadTheData(dataModel: homeContentModel)
                 }
-                
-                guard let resultHomeModel = resultHomeModel else
-                {
-                    print("Error in homeModel")
-                    return
+                catch{
+                    print("Error:- failed to convert data")
                 }
-                
-                completion(resultHomeModel)
-            })
-            task.resume()
-        }
-        
-    }
-    func performImageLoaderRequest(url: String) {
-        
-        ImageLoader.getImageFromUrl(url: url, completion: { [weak self] data in
-            
-            self?.realImgData = data
-            if let realImgData = self?.realImgData{
-                self?.delegate?.didGetLogoImage(data: realImgData)
+            }else{
+                print("Error:- Counldnt complete https fetch ")
             }
-            
         })
-
     }
 }
