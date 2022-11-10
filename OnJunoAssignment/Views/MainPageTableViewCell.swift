@@ -22,7 +22,7 @@ public struct SVGImgProcessor:ImageProcessor {
         }
     }
 }
-class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
+class MainPageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var infoStackView: UIStackView!
@@ -42,13 +42,11 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
     
     @IBOutlet weak var infoSubtitleLabel: UILabel!
     
-    static var identifier = "MainPageTableViewCell"
-    let vModel = MainPageViewModel()
-    var imageData: Data?
+    static let identifier = "MainPageTableViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        vModel.delegate = self
     }
     class func nib() -> UINib{
         return UINib(nibName: "MainPageTableViewCell", bundle: nil)
@@ -70,6 +68,7 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
                 nameTitleLabel.text = homeData.crypto_balance.title
                 nameSubtitleLabel.text = homeData.crypto_balance.subtitle
                 logoImage.kf.setImage(with: URL(string: homeData.your_crypto_holdings[1].logo), options: [.processor(SVGImgProcessor())])
+                applyCorners(for: cellSuperView)
             }
             else if section == 1{
                 infoStackView.isHidden = true
@@ -78,6 +77,7 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
                 nameSubtitleLabel.isHidden = true
                 nameTitleLabel.text = homeData.your_crypto_holdings[row].title
                 logoImage.kf.setImage(with: URL(string: homeData.your_crypto_holdings[row].logo), options: [.processor(SVGImgProcessor())])
+                applyCorners(for: cellSuperView)
             }
         }
         else if state == .normal{
@@ -89,6 +89,7 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
                 infoTitleLabel.text = "$" + homeData.crypto_balance.current_bal_in_usd
                 infoSubtitleLabel.text = ""
                 logoImage.kf.setImage(with: URL(string: homeData.your_crypto_holdings[1].logo), options: [.processor(SVGImgProcessor())])
+                applyCorners(for: cellSuperView)
             }
             else if section == 1{
                 buyButton.isHidden = true
@@ -98,6 +99,7 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
                 infoTitleLabel.text = "$" + homeData.your_crypto_holdings[row].current_bal_in_usd
                 infoSubtitleLabel.text = ""
                 logoImage.kf.setImage(with: URL(string: homeData.your_crypto_holdings[row].logo), options: [.processor(SVGImgProcessor())])
+                applyCorners(for: cellSuperView)
             }
             
         }
@@ -110,23 +112,5 @@ class MainPageTableViewCell: UITableViewCell, ImageLoadedDelegate {
             infoSubtitleLabel.text = homeData.all_transactions[row].txn_sub_amount
             logoImage.kf.setImage(with: URL(string: homeData.all_transactions[row].txn_logo), options: [.processor(SVGImgProcessor())])
         }
-        else if section == 3{
-            
-        }
-    }    
-    
-    
-    func didGetLogoImage(data: Data) {
-        self.imageData = data
-        guard let rImg = imageData else
-        {
-            print("couldnot load image for -")
-            return
-            
-        }
-        DispatchQueue.main.async {
-            self.logoImage.image = UIImage(data: rImg)
-        }
-        
     }
 }

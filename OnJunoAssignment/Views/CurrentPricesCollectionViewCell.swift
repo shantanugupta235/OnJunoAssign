@@ -29,11 +29,6 @@ class CurrentPricesCollectionViewCell: UICollectionViewCell {
         logoImage.kf.setImage(with: URL(string: currentPrices.logo), options: [.processor(SVGImgProcessor())])
         nameTitleLabel.text = currentPrices.title
         nameSubtitleLabel.text = "$" + currentPrices.current_price_in_usd
-        print("title -- \(currentPrices.title)\n")
-        print("logo -- \(currentPrices.logo)\n")
-        print("subtitle -- \(currentPrices.current_price_in_usd)\n")
-        containerView.layer.cornerRadius = 4
-        containerView.layer.borderWidth = 1
-        containerView.layer.borderColor = UIColor.lightGray.cgColor//UIColor(red: 0.141, green: 0.188, blue: 0.239, alpha: 1).cgColor
+        applyCorners(for: contentView)
     }
 }

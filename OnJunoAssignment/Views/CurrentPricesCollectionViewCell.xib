@@ -21,10 +21,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="179" height="166"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IdU-hd-nvH">
-                                <rect key="frame" x="0.0" y="0.0" width="179" height="166"/>
+                                <rect key="frame" x="10" y="0.0" width="169" height="166"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" axis="vertical" distribution="fillProportionally" alignment="top" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8l-L1-du4">
-                                        <rect key="frame" x="10" y="78" width="159" height="68"/>
+                                        <rect key="frame" x="10" y="78" width="149" height="68"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6Z-hY-0hs">
                                                 <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="32"/>
@@ -61,7 +61,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IdU-hd-nvH" firstAttribute="leading" secondItem="8vj-Ei-IPk" secondAttribute="leading" id="MzQ-i7-RbZ"/>
+                            <constraint firstItem="IdU-hd-nvH" firstAttribute="leading" secondItem="8vj-Ei-IPk" secondAttribute="leading" constant="10" id="MzQ-i7-RbZ"/>
                             <constraint firstAttribute="trailing" secondItem="IdU-hd-nvH" secondAttribute="trailing" id="k4H-yD-CN3"/>
                             <constraint firstItem="IdU-hd-nvH" firstAttribute="top" secondItem="8vj-Ei-IPk" secondAttribute="top" id="knc-kE-iaL"/>
                             <constraint firstAttribute="bottom" secondItem="IdU-hd-nvH" secondAttribute="bottom" id="u3G-87-fOn"/>

@@ -60,7 +60,6 @@ class MainPageViewModel {
             if let realImgData = self?.realImgData{
                 self?.delegate?.didGetLogoImage(data: realImgData)
             }
-//            return realImgData
             
         })
 

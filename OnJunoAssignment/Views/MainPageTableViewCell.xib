@@ -105,10 +105,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="zyH-4v-ERP" secondAttribute="bottom" id="LXp-Ky-WlK"/>
                     <constraint firstItem="zyH-4v-ERP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Lm3-ZD-zXI"/>
                     <constraint firstAttribute="trailing" secondItem="zyH-4v-ERP" secondAttribute="trailing" id="N4e-tk-pWq"/>
                     <constraint firstItem="zyH-4v-ERP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PTX-v3-4aL"/>
+                    <constraint firstAttribute="bottom" secondItem="zyH-4v-ERP" secondAttribute="bottom" id="xwJ-dj-7ua"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

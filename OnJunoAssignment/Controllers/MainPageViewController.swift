@@ -22,17 +22,43 @@ class MainPageViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initView()
+        initViewModel()
         
+//        tableView.register(MainPageTableViewCell.nib(), forCellReuseIdentifier: MainPageTableViewCell.identifier)
+//        tableView.register(UINib(nibName: "HeaderMainPageTVCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "HeaderMainPageTVCell")
+//        tableView.register(CollectionInTableViewCell.nib(), forCellReuseIdentifier: CollectionInTableViewCell.identifier)
+//        tableView.delegate = self
+//        tableView.dataSource = self
+        
+//        guard let state = state else{
+//           return
+//        }
+//
+//        mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
+//            guard let weakSelf = self else { return }
+//            weakSelf.homeContentModel = homeModel
+//
+//            DispatchQueue.main.async {
+//                weakSelf.tableView.reloadData()
+//            }
+//        })
+        
+    }
+    
+    func initView(){
         tableView.register(MainPageTableViewCell.nib(), forCellReuseIdentifier: MainPageTableViewCell.identifier)
         tableView.register(UINib(nibName: "HeaderMainPageTVCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "HeaderMainPageTVCell")
         tableView.register(CollectionInTableViewCell.nib(), forCellReuseIdentifier: CollectionInTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
+    }
+    
+    func initViewModel(){
         guard let state = state else{
            return
         }
-        //print(state.rawValue)
+       
         mainPageViewModel.performRequest(for: state, completion: { [weak self] homeModel in
             guard let weakSelf = self else { return }
             weakSelf.homeContentModel = homeModel
@@ -41,7 +67,6 @@ class MainPageViewController: UIViewController{
                 weakSelf.tableView.reloadData()
             }
         })
-        
     }
 
 }
@@ -88,7 +113,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
         if indexPath.section == 3{
             return CGFloat(200)
         }
-        return UITableView.automaticDimension
+        return CGFloat(70)//UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderMainPageTVCell") as! HeaderMainPageTVCell
@@ -100,13 +125,19 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource{
             return 0
         }
         else{
-            return 60
+            return 50
         }
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        if section >= 3{
+            return nil
+        }
+        let newWidth = tableView.frame.width - 32.0
+        let v = UIView(frame: CGRect(x: 0, y:0, width: newWidth, height: 1))
+        v.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        return v
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return 1.0//CGFloat.leastNormalMagnitude
     }
 }
